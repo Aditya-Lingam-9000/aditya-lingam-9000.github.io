@@ -1,53 +1,223 @@
-/* CV page: action buttons and an embedded PDF (hidden on small screens). */
+/* CV (v2): sticky "at a glance" panel beside a framed PDF viewer. */
 
-.cv-actions {
-  margin-bottom: 24px;
+.cv-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  padding: 72px 0;
 }
 
-.btn-outline.cv-btn {
+/* ---------- At a glance panel ---------- */
+
+.cv-panel {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  min-width: 0;
+  padding: 28px;
+}
+
+.cv-panel__group + .cv-panel__group {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.cv-panel__name {
+  margin: 14px 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.cv-panel__caption {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.cv-panel__caption span {
+  display: block;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.cv-panel__label {
+  margin: 0 0 14px;
+}
+
+.cv-edu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-edu__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cv-edu__item + .cv-edu__item {
+  margin-top: 16px;
+}
+
+.cv-edu__period {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+}
+
+.cv-edu__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--navy);
+}
+
+.cv-edu__details {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cv-panel__email {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  min-height: 32px;
+  max-width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  overflow-wrap: anywhere;
 }
 
-.cv-btn svg {
+.cv-panel__email svg {
   flex: none;
+  color: var(--slate);
 }
 
-.cv-embed {
-  padding: 3px;
-  border: 1px solid var(--divider);
-  background: var(--card-bg);
+.cv-panel__email:hover {
+  color: var(--accent-hover);
 }
 
-.cv-frame {
-  display: block;
+.cv-panel__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cv-panel__actions .btn {
+  width: 100%;
+}
+
+/* Shown only when the inline viewer is hidden. */
+.cv-panel__note {
+  display: none;
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ---------- PDF frame ---------- */
+
+.cv-doc {
+  min-width: 0;
+  /* Room for the frame's offset block. */
+  padding: 0 14px 14px 0;
+}
+
+.cv-frame iframe {
   width: 100%;
   height: 85vh;
-  min-height: 600px;
-  border: 0;
-  background: var(--card-bg);
+  min-height: 640px;
+  background: var(--bg);
 }
 
-.cv-mobile-note {
-  display: none;
-  margin: 0;
-  color: var(--text-meta);
-  font-style: italic;
-}
+/* ---------- Responsive ---------- */
 
-@media (max-width: 768px) {
-  .cv-embed {
+@media (max-width: 900px) {
+  .cv-layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 48px 0 64px;
+  }
+
+  .cv-doc {
     display: none;
   }
 
-  .cv-mobile-note {
-    display: block;
+  .cv-panel {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    padding: 32px;
   }
 
-  .btn-outline.cv-btn {
-    min-height: 40px;
-    padding-left: 16px;
-    padding-right: 16px;
+  .cv-panel__group + .cv-panel__group {
+    margin-top: 0;
+  }
+
+  .cv-panel__group {
+    padding-bottom: 24px;
+  }
+
+  .cv-panel__group.cv-panel__id,
+  .cv-panel__group.cv-panel__edu {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .cv-panel__group.cv-panel__focus,
+  .cv-panel__group.cv-panel__contact {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .cv-panel__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  .cv-panel__note {
+    display: block;
+    flex-basis: 100%;
+  }
+
+  .cv-panel__actions .btn {
+    width: auto;
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cv-layout {
+    padding: 32px 0 48px;
+  }
+
+  .cv-panel {
+    display: block;
+    padding: 24px 20px;
+  }
+
+  .cv-panel__group {
+    padding-bottom: 0;
+  }
+
+  .cv-panel__group + .cv-panel__group {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .cv-panel__actions .btn {
+    flex-basis: 100%;
   }
 }

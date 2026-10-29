@@ -1,54 +1,69 @@
-import { rankings, hackathons } from '../data/content';
-import { Badge, ExtLink, SectionHeading, TagList } from '../components/ui';
+import CountUp from '../components/CountUp';
+import { ArrowLink, Badge, ChipList, ExtLink, PageHeader, Section } from '../components/ui';
+import { hackathons, pages, rankings } from '../data/content';
 import './Achievements.css';
+
+function RankTile({ item, lead }) {
+  const sub = item.context || item.metric;
+  return (
+    <li className={`ach-rank${lead ? ' ach-rank--lead' : ''}`}>
+      <p className="ach-rank__ordinal tabular">
+        <CountUp value={item.rank} duration={1100} />
+        <span className="ach-rank__suffix">{item.suffix}</span>
+      </p>
+      <div className="ach-rank__body">
+        <div className="ach-rank__head">
+          <h3 className="ach-rank__name">
+            <ExtLink href={item.href}>{item.name}</ExtLink>
+          </h3>
+          <Badge kind={item.badgeKind}>{item.event}</Badge>
+        </div>
+        <p className="ach-rank__note">{item.note}</p>
+      </div>
+      {sub && <p className="ach-rank__context tabular">{sub}</p>}
+    </li>
+  );
+}
+
+function HackathonPanel({ item }) {
+  return (
+    <article className="card ach-hack">
+      <div className="ach-hack__top">
+        <Badge kind="award">{item.award}</Badge>
+        <span className="eyebrow tabular">{item.date}</span>
+      </div>
+      <p className="eyebrow ach-hack__meta">{item.event}</p>
+      <h3 className="ach-hack__title">{item.title}</h3>
+      <p className="ach-hack__summary">{item.summary}</p>
+      <ChipList items={item.tags} />
+      <div className="ach-hack__link">
+        <ArrowLink to={item.link.href}>{item.link.label}</ArrowLink>
+      </div>
+    </article>
+  );
+}
 
 export default function Achievements() {
   return (
-    <div className="container page">
-      <h1 className="page-title">Achievements</h1>
+    <>
+      <PageHeader {...pages.achievements} />
+      <div className="container">
+        <Section num="01" label="Rankings" title="Challenge rankings" id="rankings">
+          <ol className="ach-ranks">
+            {rankings.map((r, i) => (
+              <RankTile key={r.href} item={r} lead={i === 0} />
+            ))}
+          </ol>
+        </Section>
 
-      <section aria-labelledby="ach-rankings">
-        <SectionHeading id="ach-rankings">Challenge Rankings</SectionHeading>
-        <ul className="ach-rank-list">
-          {rankings.map((r) => (
-            <li key={r.href} className="ach-rank">
-              <strong className="ach-rank-title">
-                {r.place} – {r.event}
-              </strong>
-              <span className="ach-rank-detail">
-                <em>
-                  <ExtLink href={r.href}>{r.name}</ExtLink>
-                </em>
-                , {r.note}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="ach-hackathons">
-        <SectionHeading id="ach-hackathons">Hackathons</SectionHeading>
-        <div className="ach-rows">
-          {hackathons.map((h) => (
-            <article key={h.id} className="ach-row">
-              <div className="ach-row-meta">
-                <Badge kind="award">{h.award}</Badge>
-                <span className="ach-row-event">
-                  {h.event} · {h.date}
-                </span>
-              </div>
-              <h3 className="ach-row-title">{h.title}</h3>
-              <p className="ach-row-summary">{h.summary}</p>
-              <TagList tags={h.tags} />
-              {h.link && (
-                <ExtLink href={h.link.href} className="ach-row-link">
-                  {h.link.label} →
-                </ExtLink>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    </div>
+        <Section num="02" label="Hackathons" title="Hackathons" id="hackathons">
+          <div className="ach-hacks">
+            {hackathons.map((h) => (
+              <HackathonPanel key={h.id} item={h} />
+            ))}
+          </div>
+        </Section>
+      </div>
+    </>
   );
 }

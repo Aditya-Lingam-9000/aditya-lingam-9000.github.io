@@ -1,97 +1,186 @@
-/* Achievements page: CV-style ranking list and text-only project rows. */
+/* Achievements (v3, compact): hairline rank list and two small hackathon cards. */
 
-.ach-rank-list {
+/* ---------- Rank list ---------- */
+
+.ach-ranks {
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
 }
 
 .ach-rank {
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 16px;
+  min-width: 0;
+  padding: 16px 0 16px 14px;
+  border-bottom: 1px solid var(--line);
 }
 
-.ach-rank::marker {
-  color: var(--text-muted);
+/* Standout row: a 3px accent rule on the left edge. */
+
+.ach-rank--lead::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 0;
+  width: 3px;
+  background: var(--accent);
 }
 
-.ach-rank-title {
-  display: block;
+.ach-rank__ordinal {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--navy);
 }
 
-.ach-rank-detail {
-  color: var(--text-secondary);
+.ach-rank__suffix {
+  margin: 0.1em 0 0 0.08em;
+  font-size: 0.42em;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--slate);
 }
 
-.ach-row:first-child {
-  padding-top: 0;
+.ach-rank__body {
+  min-width: 0;
 }
 
-.ach-row {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--divider-soft);
-}
-
-.ach-row-meta {
+.ach-rank__head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px 10px;
-  margin-bottom: 10px;
+  gap: 4px 12px;
 }
 
-.ach-row-meta .badge {
-  margin-bottom: 0;
-}
-
-.ach-row-event {
-  font-size: 13px;
-  color: var(--text-meta);
-}
-
-.ach-row-title {
-  margin: 0 0 8px;
+.ach-rank__name {
+  margin: 0;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.4;
-  text-transform: uppercase;
-  color: var(--navy);
 }
 
-.ach-row-summary {
-  margin: 0 0 10px;
-  font-size: 15px;
-  line-height: 24px;
+.ach-rank__name a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition), text-decoration-color var(--transition);
+}
+
+.ach-rank__name a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.ach-rank__note {
+  margin: 4px 0 0;
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
-.ach-row-link {
-  display: inline-block;
+/* Notes are stored as sentence continuations; capitalise for display only. */
+.ach-rank__note::first-letter {
+  text-transform: uppercase;
+}
+
+.ach-rank__context {
+  margin: 3px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+/* ---------- Hackathon cards ---------- */
+
+.ach-hacks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ach-hack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 18px 20px;
+}
+
+.ach-hack__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 10px;
+}
+
+.ach-hack__meta {
+  margin: 0 0 4px;
+  font-size: 11px;
+}
+
+.ach-hack__title {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ach-hack__summary {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.ach-hack__link {
+  margin-top: auto;
+  padding-top: 12px;
   font-size: 14px;
 }
 
-@media (max-width: 768px) {
-  .ach-row-title {
-    font-size: 15px;
-  }
+/* ---------- Responsive ---------- */
 
-  .ach-row-summary {
-    font-size: 14px;
-    line-height: 22px;
+@media (max-width: 700px) {
+  .ach-hacks {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (max-width: 480px) {
-  .ach-row-title {
-    font-size: 14px;
+@media (max-width: 600px) {
+  .ach-rank {
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 10px;
+    padding: 14px 0 14px 12px;
   }
 
-  .ach-row-summary {
-    font-size: 13px;
-    line-height: 20px;
+  .ach-rank__ordinal {
+    font-size: 24px;
   }
 
-  .ach-row-event {
-    font-size: 12px;
+  .ach-rank__context {
+    grid-column: 2;
+    margin-top: 6px;
+    text-align: left;
+  }
+
+  .ach-hack {
+    padding: 16px;
   }
 }

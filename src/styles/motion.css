@@ -1,0 +1,243 @@
+/* Motion layer: transitions and animations only. No layout or colour decisions live here.
+   Everything is disabled under prefers-reduced-motion (see the end of this file). */
+
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur: 420ms;
+  --dur-reveal: 800ms;
+}
+
+/* ---------- Route change ---------- */
+
+.route-view {
+  animation: route-in 520ms var(--ease-out) both;
+}
+
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Scroll reveal (driven by useReveal) ---------- */
+
+html.motion [data-reveal] {
+  transition:
+    opacity var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+html.motion [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+/* Section rails slide in from the side rather than from below. */
+html.motion .section__rail[data-reveal]:not(.is-revealed) {
+  transform: translateX(-14px);
+}
+
+/* Timeline spine draws downward once the list is in view. */
+html.motion .timeline--draw::before {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.2s var(--ease-in-out) 150ms;
+}
+
+html.motion .timeline--draw.is-drawn::before {
+  transform: scaleY(1);
+}
+
+/* Timeline nodes pop in with their item. */
+html.motion .timeline__item[data-reveal]::before {
+  transition: transform 500ms var(--ease-out) calc(var(--reveal-delay, 0ms) + 200ms);
+}
+
+html.motion .timeline__item[data-reveal]:not(.is-revealed)::before {
+  transform: scale(0);
+}
+
+/* ---------- Theme switch crossfade ---------- */
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 450ms var(--ease-in-out),
+    color 450ms var(--ease-in-out),
+    border-color 450ms var(--ease-in-out),
+    fill 450ms var(--ease-in-out),
+    stroke 450ms var(--ease-in-out) !important;
+  transition-delay: 0ms !important;
+}
+
+/* ---------- Links ---------- */
+
+a {
+  transition:
+    color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    text-decoration-color var(--dur-fast) ease,
+    opacity var(--dur-fast) ease;
+}
+
+.link-arrow__icon {
+  transition: transform 300ms var(--ease-out);
+}
+
+.link-arrow:hover .link-arrow__icon {
+  transform: translateX(4px);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform 250ms var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 80ms;
+}
+
+.btn svg {
+  transition: transform 300ms var(--ease-out);
+}
+
+.btn:hover svg:last-child:not(:first-child) {
+  transform: translateX(3px);
+}
+
+/* ---------- Cards and chips ---------- */
+
+.card {
+  transition:
+    border-color 300ms ease,
+    transform 450ms var(--ease-out);
+}
+
+/* The sticky CV panel stays put. */
+.card:not(.cv-panel):hover {
+  transform: translateY(-3px);
+}
+
+.chip,
+button.chip {
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform 200ms var(--ease-out);
+}
+
+button.chip:active {
+  transform: scale(0.96);
+}
+
+/* ---------- Header ---------- */
+
+/* Underline and panel motion live in Layout.css next to the header styles. */
+
+.header__link {
+  transition: color var(--dur-fast) ease;
+}
+
+.header__theme svg {
+  animation: icon-spin-in 500ms var(--ease-out);
+}
+
+@keyframes icon-spin-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.header__menu-btn svg {
+  animation: icon-fade-in 300ms var(--ease-out);
+}
+
+@keyframes icon-fade-in {
+  from {
+    opacity: 0;
+    transform: rotate(-45deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile panel items cascade in when the menu opens. */
+.header__panel.is-open li {
+  animation: menu-item-in 420ms var(--ease-out) both;
+}
+
+.header__panel.is-open li:nth-child(2) { animation-delay: 50ms; }
+.header__panel.is-open li:nth-child(3) { animation-delay: 100ms; }
+.header__panel.is-open li:nth-child(4) { animation-delay: 150ms; }
+.header__panel.is-open li:nth-child(5) { animation-delay: 200ms; }
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.footer__list a svg {
+  transition: transform 300ms var(--ease-out);
+}
+
+.footer__list a:hover svg {
+  transform: translateX(2px);
+}
+
+.footer__top svg {
+  transition: transform 300ms var(--ease-out);
+}
+
+.footer__top:hover svg {
+  transform: translateY(-3px);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}

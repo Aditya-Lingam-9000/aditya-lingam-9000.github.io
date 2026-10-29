@@ -1,13 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Button } from '../components/ui';
+import './NotFound.css';
 
 export default function NotFound() {
   return (
-    <div className="container page">
-      <h1 className="page-title">Page not found</h1>
-      <p>The page you are looking for does not exist or has moved.</p>
-      <p>
-        <Link to="/">Back to the About page</Link>
-      </p>
-    </div>
+    <section className="nf" aria-labelledby="nf-title">
+      <div className="container">
+        <div className="nf__inner">
+          <div className="nf__crumb">
+            <span className="eyebrow eyebrow--accent tabular">404</span>
+            <span className="eyebrow">/ Not found</span>
+          </div>
+          <h1 className="nf__title" id="nf-title">
+            Page not found
+          </h1>
+          <p className="nf__text">The page you are looking for does not exist or may have moved.</p>
+          <div className="btn-row">
+            <Button to="/" variant="primary" arrow>
+              Back to home
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

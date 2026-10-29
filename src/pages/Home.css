@@ -1,200 +1,687 @@
-/* Home (About) page. All classes are prefixed with home- so nothing leaks to other pages. */
+/* Home (About) page, v2 editorial minimal. Every class is prefixed with home-. See design.md section 8. */
 
-.home-grid {
-  display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
-  gap: 30px;
-  align-items: start;
+/* ---------- Top area: name, About and profile card, all in the first viewport ---------- */
+
+.home-top {
+  padding: 22px 0 32px;
 }
 
-/* ---------- Profile column ---------- */
+.home-top__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 336px;
+  align-items: start;
+  gap: 40px;
+}
+
+.home-top__main {
+  min-width: 0;
+}
+
+.home-top__eyebrow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 8px;
+}
+
+.home-top__name {
+  margin: 0;
+  font-size: clamp(32px, 4.2vw, 46px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.home-top__statement {
+  max-width: 640px;
+  margin: 10px 0 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* About: numbered label with a hairline, then the bio. */
+
+.home-top__about {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.home-top__about-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.home-top__about-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.home-about {
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.56;
+}
+
+.home-about p {
+  margin-bottom: 8px;
+}
+
+.home-about > :last-child {
+  margin-bottom: 0;
+}
+
+.home-about__lead {
+  color: var(--navy);
+}
+
+.home-about__lead a {
+  font-weight: 500;
+}
+
+.home-top__actions {
+  margin-top: 16px;
+}
+
+/* Profile card */
 
 .home-profile {
   min-width: 0;
+  padding: 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
-.home-photo {
-  display: block;
+.home-profile__head {
+  display: grid;
+  grid-template-columns: 146px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+/* Smaller offset block than the default frame, so it stays inside the card. */
+.home-profile__frame {
   width: 100%;
-  max-width: 270px;
-  aspect-ratio: 1 / 1;
+  padding: 0 10px 10px 0;
+}
+
+.home-profile__frame::before {
+  inset: 10px 0 0 10px;
+}
+
+.home-profile__frame > * {
+  width: 100%;
+}
+
+.home-profile__photo {
+  width: 100%;
   height: auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 20%;
-  padding: 4px;
-  border: 1px solid var(--divider);
-  border-radius: 4px;
-  background: var(--card-bg);
+  background: var(--bg-alt);
 }
 
-.home-caption {
-  margin: 12px 0 14px;
-  text-align: center;
-  line-height: 1.4;
+.home-profile__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  min-width: 0;
 }
 
-.home-caption-title {
-  display: block;
+.home-profile__role {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
   color: var(--navy);
-  font-size: 14px;
-  font-weight: 600;
 }
 
-.home-caption-subtitle {
-  display: block;
-  color: var(--slate);
-  font-size: 14px;
-  font-weight: 600;
+.home-profile__field {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
 }
+
+/* Contact list: hairline-separated rows. */
 
 .home-contacts {
-  list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  list-style: none;
 }
 
 .home-contact {
+  border-top: 1px solid var(--line);
+}
+
+.home-contact__row {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 4px;
-  border-top: 1px solid var(--divider);
-}
-
-.home-contact:last-child {
-  border-bottom: 1px solid var(--divider);
-}
-
-.home-contact-icon {
-  flex: 0 0 20px;
-  display: inline-flex;
-  justify-content: center;
-  color: var(--text-meta);
-}
-
-.home-contact-label {
-  min-width: 0;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
   overflow-wrap: anywhere;
 }
 
-/* ---------- Text column ---------- */
-
-.home-main {
-  min-width: 0;
+.home-contact__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--slate);
+  transition: color var(--dur-fast) ease;
 }
 
-.home-main section:first-child > p:last-child {
-  margin-bottom: 0;
+a.home-contact__row:hover,
+a.home-contact__row:hover .home-contact__icon {
+  color: var(--accent);
 }
 
-.home-main .rule-heading {
-  margin-top: 36px;
+.home-contact--text .home-contact__row {
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
-.home-inline-list {
-  list-style: none;
+.home-facts {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.home-facts__head {
+  margin-bottom: 8px;
+}
+
+/* ---------- Stats panel ---------- */
+
+.home-stats-wrap {
+  position: relative;
+}
+
+.home-stats {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0 32px;
+}
+
+.home-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* Sentence case keeps metric names such as "mIoU" intact. */
+.home-stat__label {
+  display: block;
+  max-width: 210px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* ---------- Sections ---------- */
+
+.home-section--first {
+  padding-top: 40px;
+}
+
+/* Latest (news timeline) */
+
+.home-news__text {
+  margin: 0;
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+/* Selected work: hairline-joined card grid */
+
+.home-work {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-.home-inline-list li {
-  display: inline-block;
-  white-space: nowrap;
+.home-work__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px;
 }
 
-.home-inline-list li:not(:last-child)::after {
-  content: '\00b7';
-  margin: 0 8px;
+/* Kind over badge, always stacked, so titles line up across the row. */
+.home-work__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.home-work__title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+.home-work__summary {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.home-work__link {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+/* Education */
+
+.home-edu__title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.home-edu__line {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.home-edu__line--meta {
+  margin-top: 4px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
-.home-news ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.home-news li + li {
-  margin-top: 6px;
-}
-
-.home-news strong {
-  color: var(--navy);
-}
-
-.home-edu-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 16px;
-}
-
-.home-edu-period {
-  color: var(--text-meta);
-  white-space: nowrap;
-}
-
-.home-education > li:last-child {
-  margin-bottom: 0;
-}
+/* Skills */
 
 .home-skills {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 28px;
 }
 
-.home-skills li + li {
-  margin-top: 6px;
+.home-skills__group {
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-strong);
 }
 
-.home-skills strong {
-  color: var(--navy);
+.home-skills__head {
+  margin: 0 0 16px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.home-langs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin: 40px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--text);
+}
+
+.home-langs__list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.home-langs__sep {
+  color: var(--line-strong);
 }
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 768px) {
-  .home-grid {
+/* Below 1080px the 3-up columns get too narrow beside the rail: one card per row, meta beside the text. */
+@media (max-width: 1080px) {
+  .home-work {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
+    gap: 12px;
   }
 
-  .home-profile {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+  .home-work__card {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 32px;
   }
 
-  .home-photo {
-    margin: 0 auto;
+  .home-work__meta {
+    grid-row: 1 / span 3;
+    margin-bottom: 0;
+  }
+
+  .home-work__link {
+    align-self: end;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* Single column: photo and name lead, then compact contacts, then the About text. */
+@media (max-width: 900px) {
+  .home-top {
+    padding: 20px 0 28px;
+  }
+
+  .home-top__grid,
+  .home-top__main,
+  .home-profile,
+  .home-profile__head {
+    display: contents;
+  }
+
+  .home-top__grid {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-areas:
+      'photo name'
+      'photo caption'
+      'contacts contacts'
+      'eyebrow eyebrow'
+      'statement statement'
+      'about about'
+      'facts facts'
+      'actions actions';
+    column-gap: 16px;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .home-profile__frame {
+    grid-area: photo;
+    align-self: start;
+    margin-bottom: 4px;
+  }
+
+  .home-top__name {
+    grid-area: name;
+    align-self: end;
+    font-size: clamp(26px, 6vw, 40px);
+    line-height: 1.1;
+  }
+
+  .home-top__name > span {
+    display: block;
+  }
+
+  .home-profile__caption {
+    grid-area: caption;
+    align-self: start;
+    margin-top: 8px;
   }
 
   .home-contacts {
-    font-size: 13.5px;
+    grid-area: contacts;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
   }
 
-  .home-main .rule-heading {
-    margin-top: 30px;
+  .home-contact {
+    border-top: 0;
   }
 
-  .info-box.home-news {
-    max-height: 160px;
+  .home-contact--text,
+  .home-contact--mail {
+    flex: 1 0 100%;
+  }
+
+  .home-contact--text .home-contact__row,
+  .home-contact--mail .home-contact__row {
+    padding: 3px 0;
+  }
+
+  /* Profile links collapse to a row of icon buttons; labels stay available to screen readers. */
+  .home-contact--link {
+    margin-top: 6px;
+  }
+
+  .home-contact--link .home-contact__row {
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .home-contact--link .home-contact__icon {
+    margin-top: 0;
+    color: var(--text-secondary);
+  }
+
+  .home-contact--link .home-contact__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .home-top__eyebrow {
+    grid-area: eyebrow;
+    margin: 16px 0 6px;
+  }
+
+  .home-top__statement {
+    grid-area: statement;
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .home-top__about {
+    grid-area: about;
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .home-facts {
+    grid-area: facts;
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .home-top__actions {
+    grid-area: actions;
+    margin-top: 20px;
+  }
+
+  .home-stats {
+    padding: 0 28px;
+  }
+
+  .home-section--first {
+    padding-top: 32px;
+  }
+
+  .home-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
-  .home-edu-head {
-    display: block;
+  .home-top__grid {
+    grid-template-columns: 96px minmax(0, 1fr);
+    column-gap: 14px;
   }
 
-  .home-edu-period {
-    display: block;
+  .home-profile__frame {
+    padding: 0 8px 8px 0;
+  }
+
+  .home-profile__frame::before {
+    inset: 8px 0 0 8px;
+  }
+
+  .home-top__name {
+    font-size: 26px;
+  }
+
+  .home-profile__role {
+    font-size: 14px;
+  }
+
+  .home-profile__field {
+    font-size: 12px;
+  }
+
+  .home-about {
+    font-size: 14.5px;
+  }
+
+  .home-top__actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .home-stats {
+    padding: 0 20px;
+  }
+
+  /* Keep the 2 x 2 grid flush: odd cells start at the panel edge. */
+  .home-stats__row .stat:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .home-stats__row .stat:nth-child(even) {
+    padding-left: 16px;
+  }
+
+  .home-stat .stat__value {
+    font-size: 30px;
+  }
+
+  .home-stat {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .home-stat__label {
+    font-size: 12px;
+  }
+
+  .home-section--first {
+    padding-top: 28px;
+  }
+
+  .home-work__card {
+    display: flex;
+    padding: 20px;
+  }
+
+  .home-work__meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .home-work__link {
+    align-self: stretch;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
   }
 }
 
 @media (max-width: 480px) {
-  .home-contacts {
-    font-size: 13px;
+  .home-skills {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+
+/* ---------- Motion: staged entrance ---------- */
+
+.home-top__eyebrow,
+.home-top__name,
+.home-top__statement,
+.home-top__actions {
+  animation: home-rise 900ms var(--ease-out) both;
+}
+
+.home-top__eyebrow { animation-delay: 80ms; }
+.home-top__name { animation-delay: 160ms; }
+.home-top__statement { animation-delay: 280ms; }
+.home-top__actions { animation-delay: 380ms; }
+
+@keyframes home-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Portrait wipes up into its frame; the offset block slides in behind it. */
+.home-profile__photo {
+  animation: home-wipe 1100ms var(--ease-out) 250ms both;
+}
+
+.home-profile__frame::before {
+  animation: home-offset 900ms var(--ease-out) 650ms both;
+}
+
+@keyframes home-wipe {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.06);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+@keyframes home-offset {
+  from {
+    opacity: 0;
+    transform: translate(-10px, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

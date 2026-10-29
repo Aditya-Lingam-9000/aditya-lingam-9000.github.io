@@ -1,0 +1,53 @@
+/* NotFound (v2): a large, quiet page-header style block with generous space. */
+
+.nf {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--header-h) - 160px);
+  min-height: calc(100svh - var(--header-h) - 160px);
+  padding: 120px 0 144px;
+}
+
+.nf .container {
+  width: 100%;
+}
+
+.nf__inner {
+  max-width: 720px;
+  padding-left: 32px;
+  border-left: 1px solid var(--line-strong);
+}
+
+.nf__crumb {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.nf__title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.nf__text {
+  margin: 20px 0 36px;
+  max-width: 560px;
+  font-size: 17px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .nf {
+    padding: 80px 0 96px;
+  }
+
+  .nf__inner {
+    padding-left: 20px;
+  }
+
+  .nf__text {
+    font-size: 15px;
+  }
+}

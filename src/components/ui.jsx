@@ -1,8 +1,6 @@
-// Small shared building blocks. Styles live in src/styles/theme.css.
-
-export function isExternal(href) {
-  return /^(https?:|mailto:)/.test(href);
-}
+// Shared building blocks. Styles live in src/styles/theme.css.
+import { Link } from 'react-router-dom';
+import Icon from './Icons';
 
 // Anchor that opens off-site links in a new tab and keeps local files (cv.pdf) relative.
 export function ExtLink({ href, children, className, ...rest }) {
@@ -19,6 +17,22 @@ export function ExtLink({ href, children, className, ...rest }) {
   );
 }
 
+// Internal routes (starting with "/") use the router; everything else is a plain anchor.
+export function SmartLink({ to, children, ...rest }) {
+  if (to.startsWith('/')) {
+    return (
+      <Link to={to} {...rest}>
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <ExtLink href={to} {...rest}>
+      {children}
+    </ExtLink>
+  );
+}
+
 // Renders inline segments from content.js: 'text' | { b: 'bold' } | { text, href }.
 export function RichText({ parts }) {
   return parts.map((part, i) => {
@@ -32,12 +46,40 @@ export function RichText({ parts }) {
   });
 }
 
-// variant: 'rule' (slate heading on a line) | 'underline' (navy heading, accent bottom border).
-export function SectionHeading({ children, variant = 'rule', as: Tag = 'h2', id }) {
+// Inner-page header: "02 / Research" crumb, title, optional intro.
+export function PageHeader({ num, label, title, intro }) {
   return (
-    <Tag id={id} className={variant === 'underline' ? 'underline-heading' : 'rule-heading'}>
-      {children}
-    </Tag>
+    <header className="page-header">
+      <div className="container">
+        <div className="page-header__crumb">
+          <span className="eyebrow eyebrow--accent">{num}</span>
+          <span className="eyebrow">/ {label}</span>
+        </div>
+        <h1 className="page-header__title">{title}</h1>
+        {intro && <p className="page-header__intro">{intro}</p>}
+      </div>
+    </header>
+  );
+}
+
+// Section with a sticky label rail. `title` renders as the visible h2 in the body.
+export function Section({ num, label, title, id, children, className = '' }) {
+  const headingId = id ? `${id}-title` : undefined;
+  return (
+    <section className={`section ${className}`.trim()} id={id} aria-labelledby={headingId}>
+      <div className="section__rail" aria-hidden="true">
+        <span className="eyebrow eyebrow--accent tabular">{num}</span>
+        <span className="eyebrow">{label}</span>
+      </div>
+      <div className="section__body">
+        {title && (
+          <h2 className="section__title" id={headingId}>
+            {title}
+          </h2>
+        )}
+        {children}
+      </div>
+    </section>
   );
 }
 
@@ -45,33 +87,47 @@ export function Badge({ kind = 'vision', children }) {
   return <span className={`badge badge--${kind}`}>{children}</span>;
 }
 
-export function LinkButton({ href, children }) {
+// variant: 'primary' | 'outline' | 'ghost-ink'; size: undefined | 'sm'.
+export function Button({ to, variant = 'outline', size, icon, arrow, children, ...rest }) {
+  const className = `btn btn--${variant}${size ? ` btn--${size}` : ''}`;
   return (
-    <ExtLink href={href} className="btn-outline">
+    <SmartLink to={to} className={className} {...rest}>
+      {icon && <Icon name={icon} size={size === 'sm' ? 13 : 16} />}
       {children}
-    </ExtLink>
+      {arrow && <Icon name="arrowRight" size={16} />}
+    </SmartLink>
   );
 }
 
-export function ButtonRow({ links }) {
+// Row of small outline buttons from [{ label, href }].
+export function LinkButtons({ links }) {
   if (!links?.length) return null;
   return (
     <div className="btn-row">
       {links.map((l) => (
-        <LinkButton key={l.label} href={l.href}>
+        <Button key={l.label} to={l.href} size="sm">
           {l.label}
-        </LinkButton>
+        </Button>
       ))}
     </div>
   );
 }
 
-export function TagList({ tags }) {
-  if (!tags?.length) return null;
+export function ArrowLink({ to, children, ...rest }) {
   return (
-    <ul className="tag-list">
-      {tags.map((t) => (
-        <li key={t} className="tag">
+    <SmartLink to={to} className="link-arrow" {...rest}>
+      {children}
+      <Icon name="arrowRight" size={16} className="link-arrow__icon" />
+    </SmartLink>
+  );
+}
+
+export function ChipList({ items }) {
+  if (!items?.length) return null;
+  return (
+    <ul className="chip-list">
+      {items.map((t) => (
+        <li key={t} className="chip">
           {t}
         </li>
       ))}

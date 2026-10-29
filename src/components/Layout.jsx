@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import BackToTop from './BackToTop';
+import useReveal from './useReveal';
 import { navLinks, profile } from '../data/content';
 import './Layout.css';
 
 export default function Layout() {
   const { pathname } = useLocation();
+  useReveal(pathname);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,10 +24,12 @@ export default function Layout() {
       </button>
       <Navbar />
       <main id="main" tabIndex={-1}>
-        <Outlet />
+        {/* Keyed by route so each page plays the entrance transition. */}
+        <div key={pathname} className="route-view">
+          <Outlet />
+        </div>
       </main>
       <Footer />
-      <BackToTop />
     </>
   );
 }

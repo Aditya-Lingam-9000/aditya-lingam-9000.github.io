@@ -17,9 +17,11 @@ All text, links and dates live in one file: `src/data/content.js`. Pages only re
 
 | What | Where |
 | --- | --- |
-| Bio, news, education, skills | `bio`, `news`, `education`, `skills` in `content.js` |
-| Publications and research challenges | `publications`, `challenges` |
+| Hero, stats, selected work | `hero`, `stats`, `selectedWork` in `content.js` |
+| Bio, news, education, skills | `bio`, `news`, `education`, `skills` |
+| Publications and research challenges | `publications`, `challenges` (filter uses `domain` / `researchDomains`) |
 | Rankings and hackathons | `rankings`, `hackathons` |
+| Page headers, footer call to action | `pages`, `contactCta` |
 | Contact links and footer icons | `contacts`, `socials` |
 | Photo / CV | replace `public/profile.jpg` / `public/cv.pdf` |
 
@@ -29,13 +31,17 @@ All text, links and dates live in one file: `src/data/content.js`. Pages only re
 src/
   data/content.js        all site content
   styles/theme.css       colour tokens (light + dark) and shared component styles
-  components/            navbar, footer, back-to-top, icons, shared UI pieces
+  components/            header, footer, icons, shared UI pieces (sections, buttons, cards)
   pages/                 About (Home), Research, Achievements, CV, NotFound
 public/                  profile photo, CV PDF, research thumbnails, favicon
 ```
 
-## Deploying
+## Deploying (GitHub Pages)
 
-The build uses relative paths and hash routing, so `dist/` works on any static host, including GitHub Pages (including project sub-paths), Netlify and Vercel, with no server configuration.
+The build uses relative paths and hash routing, so it works from the project sub-path on GitHub Pages without extra configuration.
 
-For GitHub Pages: run `npm run build` and publish the `dist/` folder (for example with the `gh-pages` branch or a Pages workflow).
+`.github/workflows/deploy.yml` builds the site on every push to `main` and publishes only the built `dist/` folder. The repository can stay private; the published site is public.
+
+One-time setup: in the repository go to **Settings > Pages** and set **Source** to **GitHub Actions**. The site is then served at `https://<username>.github.io/proff_portfolio/`.
+
+Note: GitHub Pages from a **private** repository requires a paid GitHub plan (Pro, Team or Enterprise). On the free plan, Pages only works for public repositories.

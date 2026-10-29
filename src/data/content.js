@@ -11,9 +11,84 @@ export const profile = {
   cv: 'cv.pdf',
 };
 
+// Home hero band.
+export const hero = {
+  eyebrow: [''],
+  // B.Tech, Artificial Intelligence & Machine Learning', 'Rajiv Gandhi University of Knowledge Technologies
+  statement: '',
+  // I work on computer vision, robust deep learning and medical image analysis, mostly through international research challenges.
+  primary: { label: 'View research', to: '/research' },
+  secondary: { label: 'Download CV', to: 'cv.pdf' },
+};
+
+// Figures shown in the stats row under the hero.
+export const stats = [
+  { value: '3rd', label: 'ICRA 2026 GOOSE Challenge' },
+  { value: '70.08%', label: 'Composite mIoU, GOOSE-M2F' },
+  { value: '4', label: 'International research challenges' },
+  { value: '9.1', label: 'B.Tech CGPA' },
+];
+
+// Three highlighted items on Home. `to` is an internal route or an external URL.
+export const selectedWork = [
+  {
+    kind: 'Publication',
+    badge: 'ICRA 2026',
+    badgeKind: 'robotics',
+    title: 'GOOSE-M2F',
+    summary: 'A long-tail-aware Mask2Former for fine-grained semantic segmentation of unstructured outdoor terrain. 3rd place, 70.08% composite mIoU.',
+    to: '/research',
+  },
+  {
+    kind: 'Research challenge',
+    badge: 'MICCAI 2026',
+    badgeKind: 'medical',
+    title: 'Multi-organ ultrasound analysis',
+    summary: 'A unified multi-branch framework for ultrasound segmentation and diagnostic classification across B-mode, CEUS and video.',
+    to: '/research',
+  },
+  {
+    kind: 'Hackathon',
+    badge: 'MacBook Pro Award',
+    badgeKind: 'award',
+    title: 'Satyamev-Bot',
+    summary: 'A multimodal AI fact-checking system, recognised among the Top 34 of 3,000+ teams at Build for Good 2026.',
+    to: '/achievements',
+  },
+];
+
+// Closing call to action (footer band).
+export const contactCta = {
+  title: 'Open to research internships and collaborations.',
+  text: 'Computer vision, medical imaging and robust deep learning.',
+  email: 'adityalingam9000@gmail.com',
+};
+
+// Inner page headers.
+export const pages = {
+  research: {
+    num: '02',
+    label: 'Research',
+    title: 'Research',
+    intro: 'Publications and benchmark challenge work in computer vision, medical image analysis and robust deep learning.',
+  },
+  achievements: {
+    num: '03',
+    label: 'Achievements',
+    title: 'Achievements',
+    intro: 'Placements in international research challenges and national hackathons.',
+  },
+  cv: {
+    num: '04',
+    label: 'CV',
+    title: 'Curriculum Vitae',
+    intro: 'The full CV as a PDF, with a summary alongside.',
+  },
+};
+
 export const contacts = [
   { icon: 'location', label: 'Nuzvid, Andhra Pradesh, India' },
-  { icon: 'university', label: 'RGUKT Nuzvid (IIIT)' },
+  { icon: 'university', label: 'Rajiv Gandhi University of Knowledge Technologies, Nuzvid (IIIT)' },
   { icon: 'email', label: 'adityalingam9000@gmail.com', href: 'mailto:adityalingam9000@gmail.com' },
   { icon: 'github', label: 'GitHub', href: 'https://github.com/Aditya-Lingam-9000' },
   { icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/aditya-lingam' },
@@ -34,7 +109,7 @@ export const socials = [
 export const bio = [
   [
     "Hello, I'm Jyothiradithya Lingam, a second-year B.Tech student in Artificial Intelligence and Machine Learning at ",
-    { text: 'Rajiv Gandhi University of Knowledge Technologies (RGUKT), Nuzvid', href: 'https://www.rguktn.ac.in/' },
+    { text: 'Rajiv Gandhi University of Knowledge Technologies, Nuzvid', href: 'https://www.rguktn.ac.in/' },
     ', where I hold a CGPA of 9.1. My work focuses on computer vision, robust deep learning and medical image analysis.',
   ],
   [
@@ -120,6 +195,7 @@ export const publications = [
 export const challenges = [
   {
     id: 'upar-2027',
+    domain: 'Computer Vision',
     badge: 'WACV 2027',
     badgeKind: 'vision',
     title: 'Cross-Domain Attribute-Based Person Retrieval',
@@ -135,6 +211,7 @@ export const challenges = [
   },
   {
     id: 'deep-breath-2026',
+    domain: 'Medical AI',
     badge: 'MICCAI 2026',
     badgeKind: 'medical',
     title: 'Unified Multi-Branch Framework for Multi-Organ Ultrasound Analysis',
@@ -150,6 +227,7 @@ export const challenges = [
   },
   {
     id: 'mocha-2026',
+    domain: 'Medical AI',
     badge: 'ECCV 2026',
     badgeKind: 'vision',
     title: 'Cross-Site Parkinsonian Gait Severity Prediction',
@@ -165,6 +243,7 @@ export const challenges = [
   },
   {
     id: 'goose-2026',
+    domain: 'Robotics',
     badge: 'ICRA 2026',
     badgeKind: 'robotics',
     title: 'GOOSE-M2F: Long-Tail-Aware Fine-Grained Semantic Segmentation',
@@ -182,12 +261,12 @@ export const challenges = [
   },
 ];
 
-// Ranked results, in the order shown on the CV.
+// Ranked results, in the order shown on the CV. `rank` + `suffix` drive the large ordinal; `context` is optional.
 export const rankings = [
-  { place: '3rd Place', event: 'ICRA 2026', name: 'GOOSE 2D Fine-Grained Semantic Segmentation Challenge', note: 'attaining 70.08% official composite mIoU with GOOSE-M2F.', href: 'https://www.codabench.org/competitions/14257/' },
-  { place: '16th Place', event: 'ECCV 2026', name: 'MoCha Challenge', note: 'for cross-site Parkinsonian gait severity prediction using fused BiGRU/MoMask motion representations and biomechanical features.', href: 'https://www.codabench.org/competitions/16752/' },
-  { place: '18th Place', event: 'Deep-Breath 2026 at MICCAI', name: 'UUSIVC Challenge', note: 'for multi-organ ultrasound segmentation and diagnostic classification across B-mode, CEUS, and video modalities.', href: 'https://www.codabench.org/competitions/17263/' },
-  { place: '33rd among 695 Submissions', event: 'WACV 2027', name: 'UPAR Challenge', note: 'for cross-domain attribute-based person retrieval across real-world surveillance datasets.', href: 'https://www.codabench.org/competitions/18196/' },
+  { rank: '3', suffix: 'rd', place: '3rd Place', event: 'ICRA 2026', badgeKind: 'robotics', name: 'GOOSE 2D Fine-Grained Semantic Segmentation Challenge', metric: '70.08% composite mIoU', note: 'attaining 70.08% official composite mIoU with GOOSE-M2F.', href: 'https://www.codabench.org/competitions/14257/' },
+  { rank: '16', suffix: 'th', place: '16th Place', event: 'ECCV 2026', badgeKind: 'vision', name: 'MoCha Challenge', note: 'for cross-site Parkinsonian gait severity prediction using fused BiGRU/MoMask motion representations and biomechanical features.', href: 'https://www.codabench.org/competitions/16752/' },
+  { rank: '18', suffix: 'th', place: '18th Place', event: 'Deep-Breath 2026 at MICCAI', badgeKind: 'medical', name: 'UUSIVC Challenge', note: 'for multi-organ ultrasound segmentation and diagnostic classification across B-mode, CEUS, and video modalities.', href: 'https://www.codabench.org/competitions/17263/' },
+  { rank: '33', suffix: 'rd', context: 'of 695 submissions', place: '33rd among 695 Submissions', event: 'WACV 2027', badgeKind: 'vision', name: 'UPAR Challenge', note: 'for cross-domain attribute-based person retrieval across real-world surveillance datasets.', href: 'https://www.codabench.org/competitions/18196/' },
 ];
 
 // Hackathon projects and awards.
@@ -215,8 +294,11 @@ export const hackathons = [
 ];
 
 export const navLinks = [
-  { to: '/', label: 'About' },
-  { to: '/research', label: 'Research' },
-  { to: '/achievements', label: 'Achievements' },
-  { to: '/cv', label: 'CV' },
+  { to: '/', label: 'About', num: '01' },
+  { to: '/research', label: 'Research', num: '02' },
+  { to: '/achievements', label: 'Achievements', num: '03' },
+  { to: '/cv', label: 'CV', num: '04' },
 ];
+
+// Domains used by the Research page filter (must match challenge.domain values).
+export const researchDomains = ['Computer Vision', 'Medical AI', 'Robotics'];

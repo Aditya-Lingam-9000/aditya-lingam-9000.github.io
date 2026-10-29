@@ -1,215 +1,392 @@
-/* Research page. Colours come from theme.css tokens only, so dark mode follows automatically. */
+/* Research page (v2, compact). Tokens and shared classes come from theme.css. */
 
-/* ---------- Shared bits ---------- */
-
-.research-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: 1px solid var(--card-border);
-  background: var(--thumb-bg);
-  text-align: center;
+/* Tighter than the shared section rhythm (shared rules stay untouched). */
+.research-section.section {
+  padding: 36px 0;
 }
 
-.research-placeholder span {
-  color: var(--slate);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+.research-section .section__title {
+  margin-bottom: 14px;
 }
 
-.research-result {
-  margin: 0 0 10px;
-  color: var(--navy);
-  font-size: 13px;
-  font-weight: 600;
+/* ---------- 01 Publications ---------- */
+
+.research-pubs {
+  display: grid;
+  gap: 16px;
 }
 
-/* ---------- Publications (entry card) ---------- */
-
-.research-pub-thumb {
-  flex: 0 0 160px;
-  width: 160px;
-  height: 150px;
-  border: 1px solid var(--card-border);
-  border-radius: 4px;
-  background: var(--thumb-bg);
-  overflow: hidden;
+.research-pub.card {
+  padding: 16px 18px 18px;
 }
 
-.research-pub-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.research-pub-body {
-  flex: 1;
-  min-width: 0;
-  font-size: 14px;
-}
-
-.research-pub-title {
-  margin: 0 0 6px;
-  font-size: 14.2px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.research-pub-title a {
-  font-weight: 600;
-}
-
-.research-pub-authors {
-  margin: 0 0 4px;
-  color: var(--text-authors);
-  font-size: 13px;
-}
-
-.research-pub-authors strong {
-  color: var(--navy);
-}
-
-.research-pub-venue {
-  margin: 0 0 8px;
-  color: var(--text-meta);
-  font-size: 12.5px;
-  font-style: italic;
-}
-
-/* ---------- Research challenges (project rows) ---------- */
-
-.research-rows {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.research-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--divider-soft);
-}
-
-.research-row:first-child {
-  padding-top: 4px;
-}
-
-.research-row:last-child {
-  border-bottom: 0;
-}
-
-.research-row-media {
-  flex: 0 0 250px;
-  width: 250px;
-  height: 150px;
-  border-radius: 8px;
-  background: var(--thumb-bg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.research-row-media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.research-row-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.research-row-meta {
+/* Badge and result on the left, link buttons on the right (they wrap below on narrow screens). */
+.research-pub__head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px 12px;
+  justify-content: space-between;
+  gap: 8px 16px;
   margin-bottom: 8px;
 }
 
-.research-row-meta .badge {
-  margin-bottom: 0;
+.research-pub__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
 }
 
-.research-row-period {
-  color: var(--text-muted);
+/* Result line beside the badge: eyebrow weight and colour, but kept in sentence case so metrics (mIoU) stay correct. */
+.research-pub__result {
   font-size: 13px;
-}
-
-.research-row-title {
-  margin: 0 0 6px;
-  font-size: 16px;
   font-weight: 600;
   line-height: 1.4;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--accent);
 }
 
-.research-row-title a {
+.research-pub__title {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.research-pub__title a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color var(--transition), text-decoration-color var(--transition);
+}
+
+.research-pub__title a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.research-pub__authors {
+  margin: 0 0 2px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.research-pub__venue {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.research-pub .btn-row {
+  gap: 8px;
+}
+
+/* ---------- 02 Challenges: filter toolbar ---------- */
+
+.research-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.research-toolbar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.research-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.chip.research-filter {
+  min-height: 30px;
+  padding: 0 12px;
+}
+
+.research-filter__count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+button.chip[aria-pressed='true'] .research-filter__count {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.research-toolbar__count {
+  margin: 0 0 0 auto;
+  white-space: nowrap;
+}
+
+/* ---------- 02 Challenges: timeline ---------- */
+/* Narrower date column than the shared timeline; the spine and dots follow it. */
+
+.research-timeline.timeline::before {
+  top: 6px;
+  bottom: 6px;
+  left: 88px;
+}
+
+.research-timeline .timeline__item {
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 16px;
+  padding-bottom: 10px;
+}
+
+.research-timeline .timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.research-timeline .timeline__item::before {
+  left: 84px;
+  top: 6px;
+}
+
+.research-date {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.research-date__year {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.research-entry.card {
+  padding: 14px 18px 16px;
+  /* Lets the figure switch between stacked and side-by-side depending on the card width. */
+  container-type: inline-size;
+}
+
+.research-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-bottom: 8px;
+}
+
+.research-entry__result {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+  text-align: right;
+}
+
+.research-entry__title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 3px;
+  overflow-wrap: anywhere;
+}
+
+.research-entry__challenge {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.research-entry__summary {
+  margin: 0 0 12px;
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Chips left, link buttons right, on one row when they fit. */
+.research-entry__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.research-entry__foot .chip-list {
+  gap: 6px;
+}
+
+.research-entry__foot .btn-row {
+  gap: 8px;
+}
+
+/* ---------- Figures: contained on a light plate ---------- */
+
+.research-figure {
+  margin: 0;
+}
+
+.research-figure__plate {
+  padding: 6px;
+  background: var(--figure-bg);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.research-figure__plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.research-figure__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 16px;
+  margin-top: 6px;
+}
+
+.research-figure__open {
+  font-size: 12px;
   font-weight: 600;
 }
 
-.research-row-challenge {
-  margin: 0 0 6px;
-  color: var(--text-meta);
-  font-size: 13px;
-  font-style: italic;
+.research-figure__open:hover {
+  color: var(--accent-hover);
 }
 
-.research-row-summary {
-  margin: 0 0 10px;
-  color: var(--text-secondary);
-  font-size: 15px;
-  line-height: 24px;
+/* Publication: full width of the card, below the details. */
+.research-figure--pub {
+  margin-top: 14px;
+}
+
+/* Challenge: a small stacked thumbnail by default... */
+.research-figure--side {
+  max-width: 420px;
+  margin: 0 0 12px;
+}
+
+/* ...and a side-by-side thumbnail when the card is wide enough. */
+@container (min-width: 640px) {
+  .research-entry__inner--fig {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    column-gap: 24px;
+    align-items: start;
+  }
+
+  .research-entry__inner--fig > * {
+    grid-column: 1;
+  }
+
+  .research-entry__inner--fig > .research-figure--side {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    max-width: none;
+    margin: 0;
+  }
+
+  .research-entry__inner--fig > .research-entry__foot {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 768px) {
-  .research-row-summary {
-    font-size: 14px;
-    line-height: 22px;
+@media (max-width: 600px) {
+  .research-section.section {
+    padding: 24px 0;
   }
+
+  .research-pub.card {
+    padding: 14px 14px 14px 12px;
+  }
+
+  .research-pub__title {
+    font-size: 17px;
+  }
+
+  .research-toolbar {
+    margin-bottom: 16px;
+  }
+
+  .research-toolbar__count {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+
+  /* Single column: date inline above each card, spine at the left edge. */
+  .research-timeline.timeline::before {
+    left: 4px;
+  }
+
+  .research-timeline .timeline__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    padding-left: 22px;
+    padding-bottom: 12px;
+  }
+
+  .research-timeline .timeline__item::before {
+    left: 0;
+    top: 4px;
+  }
+
+  .research-date {
+    flex-direction: row;
+    gap: 6px;
+    padding-top: 0;
+  }
+
+  .research-entry.card {
+    padding: 12px 14px 14px;
+  }
+
+  .research-entry__result {
+    flex-basis: 100%;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .research-entry__summary {
+    font-size: 14px;
+  }
+}
+
+/* Smaller link buttons inside the cards so a full row fits on one line. */
+.research-pub .btn--sm,
+.research-entry .btn--sm {
+  min-height: 30px;
+  padding: 0 12px;
 }
 
 @media (max-width: 600px) {
-  .research-pub-thumb {
-    flex: none;
-    width: 100%;
-    height: 150px;
+  .research-pub .btn-row,
+  .research-entry .btn-row {
+    gap: 6px;
   }
 
-  .research-row {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .research-row-media {
-    flex: none;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    aspect-ratio: 5 / 3;
-  }
-
-  .research-row-title {
-    font-size: 15px;
-  }
-
-  /* A placeholder only repeats the badge text; on phones it is just empty space. */
-  .research-placeholder {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .research-row-summary {
-    font-size: 13.5px;
-    line-height: 21px;
+  .research-entry__foot {
+    padding-top: 10px;
+    gap: 8px;
   }
 }

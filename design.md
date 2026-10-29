@@ -1,172 +1,135 @@
-# Design Guidelines
+# Design Guidelines (v2 - Editorial Minimal)
 
-Reference: https://nikhil-rao20.github.io/ (overall look, theme and component style only, not the exact layout).
-Stack: React JS. This file covers design only, not content.
-Method: values below were measured from the live site in a real browser (computed styles at 1440, 1280, 768 and 390px, light and dark), not guessed.
+This file covers design only, not content. Stack: React + Vite.
+v1 mirrored the reference site (https://nikhil-rao20.github.io/). v2 keeps its **palette, typeface and restraint** but uses an original, editorial layout system. Content lives in `src/data/content.js`.
 
-## 1. Overall Character
+## 1. Character
 
-- A clean, academic, text-first multi-page portfolio. White page, near-black top bar, one blue for links, grey for everything secondary.
-- It feels like a well-formatted CV: plain, dense, readable, with lots of white space and no decoration.
-- No emojis, no gradients, no decorative illustrations, no glassmorphism, no glow, no loaders.
-- No entrance, scroll-reveal, parallax or typing animations. The only motion is a short colour change on hover or focus (about 150-180ms).
-- Hierarchy comes from font weight, colour (navy, slate, grey) and thin rules, not from boxes or effects.
+- Professional, minimal, confident. It should read like a well-typeset research monograph or a design-studio CV.
+- The impact comes from **scale contrast** (an oversized name, large numerals), **strict grids**, **hairlines** and **generous white space**, never from effects.
+- No emojis, gradients, glow, blur, glassmorphism, 3D, illustrations or parallax.
+- Motion is smooth and quiet. It never changes layout, only how elements arrive and respond (see section 11).
 
-## 2. Color
+## 2. Color (tokens in `src/styles/theme.css`)
 
-Light theme (default):
+Same palette as v1, plus one new near-black "ink" surface used for full-bleed bands.
 
-| Role | Value |
-| --- | --- |
-| Page background | `#ffffff` |
-| Navbar background | `#222222`, with a 1px `#080808` border |
-| Navbar active tab background | `#080808` |
-| Navbar text | `#ffffff` |
-| Navbar hover / focus | white background, navy text `#20364c` |
-| Page title and strong text | `#20364c` (navy) |
-| Section heading, sub-heading | `#708090` (slate grey) |
-| Body text | `#333333` |
-| Secondary text (summary, authors) | `#555555` and `#444444` |
-| Meta text (venue, dates, institution) | `#666666` to `#808080`, often italic |
-| Links and accent | `#1585cf` (the only accent colour) |
-| Hairline dividers (list rows, table rows) | `#dddddd` and `#e0e0e0` |
-| Entry card border | `#e0e6ef` |
-| Info box background / border | `#f9f9f9` / `#e0e0e0` |
-| Tag chip background / text | `#f0f0f0` / `#666666` |
-| Section rule colour | `#708090` |
+| Token | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--bg` | `#ffffff` | `#0a0a0a` | page |
+| `--bg-alt` | `#f6f7f9` | `#0f1115` | alternate section band |
+| `--ink` | `#161616` | `#111827` | hero band, footer band |
+| `--ink-text` | `#ffffff` | `#f3f4f6` | text on ink |
+| `--ink-muted` | `#a3a9b2` | `#9ca3af` | secondary text on ink |
+| `--ink-line` | `#2e2e2e` | `#1f2937` | hairlines on ink |
+| `--navy` | `#20364c` | `#f3f4f6` | headings, numerals |
+| `--slate` | `#708090` | `#9ca3af` | labels, eyebrows |
+| `--text` | `#333333` | `#d1d5db` | body |
+| `--text-secondary` | `#555555` | `#c4c9d0` | summaries |
+| `--text-muted` | `#808080` | `#9ca3af` | meta |
+| `--accent` | `#1585cf` | `#3b9ee0` | links, active marks, primary button |
+| `--line` | `#e4e7eb` | `#1f2937` | hairlines, card borders |
+| `--line-strong` | `#cfd5dc` | `#374151` | emphasised rules |
 
-Dark theme (toggle, same components):
-
-| Role | Value |
-| --- | --- |
-| Page background | `#0a0a0a` |
-| Navbar | `#000000`, 1px bottom border `#1f2937`. Active tab is a dark navy (`#111c2b`) |
-| Surfaces (cards, info box) | `#111827` |
-| Borders | `#1f2937` (stronger: `#374151`), section rule `#334155` |
-| Headings | `#f3f4f6` |
-| Body text | `#d1d5db`, meta text `#9ca3af` |
-| Links | near-white `#cbd5e1` with slightly heavier weight (they drop the blue). Hover is `#f8fafc` |
-| Social icons | muted grey `#9ca3af` |
-| Contact list dividers | light grey, clearly visible |
-
-Colour rules:
-- Define all colours as CSS variables so light and dark share the same components.
-- One accent colour only. The single exception is the small venue or status badges (see Components), which may use a muted green, navy or purple fill with white text.
-- Remember the user's theme choice and default to light.
+Rules: one accent colour. Badges keep their muted solid fills (green, navy, wine, purple, ochre). Never hard-code colours in page CSS; use the tokens.
 
 ## 3. Typography
 
-- Font: **Montserrat** (weights 400, 500, 600, 700) for everything, including body text and nav. Fallback `Helvetica, Arial, sans-serif`.
-- Base text is 15px with a 1.5 line height (about 14px in cards and 13.5px on tablet and mobile, 12.5px at 480px and below).
-- Navbar brand is 18px and weight 500. Nav links are 15px and weight 400.
-- Page title (h1): 36px, weight 500, navy, with a large bottom margin (about 40px). The home page has no big h1 at all.
-- Section heading (h3): 24px, weight 500, slate grey.
-- Sub-heading (h4): about 14px, weight 500, slate grey, **uppercase**. Used for roles and categories.
-- Entry or project title: 14-16px, weight 600. Project titles are uppercase.
-- Authors 13px, venue 12.5px italic, dates and small meta 13px, badges 10.5px bold.
-- Links are blue (`#1585cf`) with weight 500, no underline at rest. On hover they get a 1px **dashed** blue underline (`border-bottom`, 2px padding-bottom). No colour change.
-- Own name or key phrases are shown in bold. Italics are for institutions, venues and notes.
-- Alignment is left. Only the profile block on mobile, logo grids and the footer on mobile are centred.
+- **Montserrat** only (400, 500, 600, 700). Use `font-variant-numeric: tabular-nums` for dates and numerals.
+- Scale:
+  - Display (home name): about 46px on desktop (`clamp(30px, 4vw, 46px)`), weight 600, letter-spacing `-0.02em`, line-height 1.02.
+  - Page title: `clamp(28px, 4vw, 36px)`, weight 600, letter-spacing `-0.015em`.
+  - Section title: 22px, weight 600.
+  - Card title: 18px, weight 600.
+  - Body: 16px, line-height 1.7.
+  - Small: 14px. Meta: 13px.
+- **Eyebrow / label**: 12px, weight 600, uppercase, letter-spacing `0.14em`, slate. It is used for section numbers ("01"), category labels and figure captions.
+- **Numerals** (stats, ranks): weight 600, navy, tight letter spacing. Large numerals are the main visual device.
+- Line length: body text never wider than about 720px.
 
-## 4. Layout and Spacing
+## 4. Layout system
 
-- One centred container: max width **900px** (about 870px of content) with 15px side padding. 730px on small tablets.
-- The home page uses a 1/3 and 2/3 split: a narrow profile column (about 270px) and a text column (about 570px). It stacks and centres below 768px.
-- Other pages use a single full-width column.
-- Vertical rhythm: about 65px between navbar and first content, 4rem between sections, 2rem between a heading and its content, 20-24px between list entries.
-- Use a 4px / 8px spacing scale.
-- The footer sits below a 1px light top border (`#eee`) with about 20px padding.
+- Container: max-width **1120px**, side padding 24px (16px under 480px).
+- **Section rail grid**: on desktop each section is a 2-column grid, a 220px label rail and a content column, with a 48px gap. The rail holds the section number (eyebrow, accent) and the section name (eyebrow, slate) and is `position: sticky; top: 96px`. Under 900px the rail stacks above the content as one inline row: "01 - About".
+- Vertical rhythm: sections 56px apart on desktop (40px under 900px, 32px under 600px). Sections are separated by a full-width `--line` hairline.
+- Grids use `gap` and hairlines. Cards in grids share borders rather than floating with shadows.
+- No horizontal scroll at any width. All images use `max-width: 100%`.
 
-## 5. Navigation
+## 5. Header
 
-- Full-width bar on a `#222` background, square corners. The brand is at the left in white, and the links are at the right, all inside the 900px container. Total height is about 80px with generous padding.
-- Link padding is 15px. The **active** link has a darker block background (`#080808`).
-- **Hover and focus**: the link becomes a white block with navy text, with a small white downward caret (triangle) beneath it.
-- At the far right is a small round theme-toggle button (about 22-36px, light grey `#f3f4f6` fill, tiny navy icon).
-- Below 768px the links collapse into a hamburger button (outlined, white bars). The brand truncates with an ellipsis. Opened links stack vertically.
-- Routing is simple page-to-page (hash routes or React Router). No sticky shrink or fade effects.
-- A small "back to top" tab (accent blue, white arrow, rounded on its left edge only) is fixed to the right edge, and is only visible after scrolling.
+- Sticky, 64px, page-background colour, 1px `--line` bottom border. Respect `env(safe-area-inset-top)`.
+- Left: a **monogram** ("JL", 32px square, `--ink` fill, white 600 text, 4px radius) followed by the name (15px, 600, navy).
+- Right: nav links (14px, 500, `--text`). The active link gets a 2px accent underline sitting on the header's bottom border. Hover changes the text to navy with no background block.
+- Theme toggle: 34px circle, 1px `--line` border, monochrome sun/moon icon.
+- Under 860px: links collapse behind a "Menu" button (text label and icon). It opens a full-width panel below the header, with links as 48px rows separated by hairlines.
 
-## 6. Section Headings
+## 6. Footer (ink band)
 
-Two variants, both quiet:
-1. **Rule heading** (most pages): slate-grey h3, with a 2px slate rule running from the end of the text to the right edge, as if the text sits on the line. The text sits on a page-coloured span.
-2. **Underlined heading** (grouped content such as experience): navy `#2c3e50` h2, 24px, weight 600, with a full-width 2px accent-blue bottom border and 15px padding below.
+- A full-bleed `--ink` band with `--ink-text`.
+- Top row: a large statement line (26-32px, weight 600) inviting contact, plus a solid accent "email" button.
+- Middle grid, 3 columns: identity (name and one line), pages, elsewhere (social links with icons). Column heads are eyebrows in `--ink-muted`.
+- Bottom row, after an `--ink-line` hairline: copyright on the left and "Back to top" on the right, both 13px muted.
+- Columns stack under 700px.
 
-Pick one variant per page and use it consistently.
+## 7. Components (shared classes in theme.css)
 
-## 7. Components
+- **Buttons**: `.btn` has a 44px min height, 0 20px padding, 4px radius, 14px 600 text and an optional trailing arrow. Variants:
+  - `.btn--primary`: accent fill, white text. Hover darkens it.
+  - `.btn--outline`: 1.5px `--line-strong` border, navy text. Hover makes the border navy.
+  - `.btn--ghost-ink`: on ink, a 1.5px `--ink-line` border with white text. Hover makes the border white.
+  - `.btn--sm`: 34px tall, 12px uppercase, letter-spacing 0.06em.
+  - No pill shapes, no shadows.
+- **Text link with arrow**: accent, 600. The arrow shifts 2px right on hover. This is the only movement allowed.
+- **Card**: `--bg` fill, 1px `--line` border, 6px radius, 28px padding. On hover the border becomes `--line-strong`. No shadow and no lift. A card can carry a 3px accent top or left rule to mark a featured item.
+- **Badge**: muted solid fill, white 11px 700 text, 3px 10px padding, 3px radius.
+- **Chip**: 1px `--line` border, transparent fill, 12px `--text-secondary` text, 4px radius, 3px 10px padding. Square-ish, not pills.
+- **Stat**: a large numeral (40-56px, 600, navy) over an eyebrow caption. Stats sit in a row divided by vertical hairlines.
+- **Timeline**: a 1px `--line-strong` vertical line. Each item has an 9px square node (accent for the latest, `--line-strong` for the rest), a date column in tabular eyebrow style, then content. Under 600px the date moves above the content.
+- **Figure frame** (photos, thumbnails): 1px `--line` border, with a solid offset block behind it (`--bg-alt` or `--ink-line` on ink, offset 14px down and right). No gradients and no shadows.
 
-**Profile block**
-- A square photo (about 270px) with a 4px padding, 1px `#ddd` border and 4px radius.
-- Below it, a centred caption: first line in navy bold (14px, 600), second line in slate grey.
-- Below that, a contact list: each row has a monochrome icon on the left and a label on the right (blue if a link), separated by 1px `#ddd` rules, 8px padding. Rows stay as hairline-separated lines and not cards.
+## 8. Page patterns
 
-**Info box (news, updates)**
-- 1px `#e0e0e0` border, 5px radius, 10px padding, `#f9f9f9` background, max height about 200px (160px on mobile) with a thin 8px custom scrollbar (thumb `#c1c1c1`, radius 4px).
-- Content is a plain bulleted list with the date in bold square brackets at the start of each item.
+- **Home**:
+  1. Top area on a light background, two columns: the main column (eyebrow, name as h1, statement, the labelled "About" text, buttons) and a 336px profile card (framed portrait with caption, all contact and profile rows with icons, research-interest chips). About and the profile details must both be visible on first load without scrolling (1440 x 900 and 390 x 844).
+  2. A stats panel directly below.
+  3. Rail sections: Latest (timeline), Selected Work (3-up card grid), Education (timeline), Skills (4-column grid of chip groups).
+  4. On phones: photo with name, then contacts as compact rows plus icon buttons, then the rest.
+- **Inner pages**: a compact page header with a breadcrumb eyebrow ("02 / Research"), the page title and a one-line intro, followed by rail sections.
+- **Research**: the featured publication card carries the paper's architecture figure (visible, with an "Open full size" link). Challenges follow on a compact timeline with filter chips by domain. Everything is dense: 14-18px card padding, small type, tight gaps.
+- **Achievements**: a compact hairline list of rankings (28px ordinals, challenge name, event badge, note, metric on the right), then two small hackathon cards.
+- **CV**: a sticky "at a glance" panel on the left and the PDF on the right. Phones get the panel and buttons only.
+- **Footer contact**: "Get in touch" opens a Gmail compose window in a new tab (a plain `mailto:` fails on devices without a mail app), and "Copy email" copies the address and confirms with "Copied". The address is also shown as text.
+- **Density rule**: pages should feel minimal. Section padding is 56px (32px on phones), section titles 22px, page titles 36px at most, and nothing should be set in oversized type.
 
-**Entry card (publications and similar)**
-- White background, 1px `#e0e6ef` border, **8px radius**, 16px padding, **no shadow**, 24px gap between cards.
-- A row layout: a thumbnail on the left (about 160 x 150px, contained, not cropped, with a light border) and text on the right with a 20px gap.
-- Text order: a small coloured badge, then a 14px bold title (blue link), then 13px authors with the owner's name in bold, then a 12.5px italic grey venue line, then the action buttons.
-- Below 600px the card stacks, and the image is full width and about 150px tall.
-- Cards never lift, scale or tilt on hover.
+## 9. Responsive breakpoints
 
-**Venue / status badge**
-- Inline block, 4px radius, padding about 3px 11px, 10.5px bold white text, slight letter spacing. Fill is a muted solid colour that depends on the category (for example green for journal, navy for conference, purple for preprint). No gradients.
+- 1120px: container max. 900px: rails stack. 860px: nav collapses. 700px: footer stacks. 600px: grids go to 1 column and the timeline date moves above. 480px: tighter padding.
+- Touch targets at least 44px. Test widths: 1440, 1280, 768, 390.
 
-**Buttons (small outlined link buttons)**
-- 1.5px navy `#20364c` border, 4px radius, white background, navy text, padding about 3px 13px, 11px, weight 600, **uppercase**, letter spacing about `.04em`.
-- Hover: fills navy with white text, with a 180ms transition. In dark mode they use `#1f2937` fill with a `#374151` border.
-- No pill shapes and no shadows.
+## 10. Accessibility
 
-**Project rows (list style, not a card grid)**
-- Each project is a horizontal row: image on the left (about 250 x 150px, contained, 8px radius, light shadow `0 2px 8px rgba(0,0,0,.1)`), text on the right.
-- The title is uppercase, 16px, weight 600, as a blue link. Below it is a 15px summary in `#555` with 24px line height, then tag chips, then a blue text link ending in an arrow ("→").
-- Rows are separated by a 1px `#e0e0e0` bottom border with 20px vertical padding. Category headings above groups use the rule heading.
-- Below 600px, the image goes on top (full width, max about 300px) and the text follows.
-- No hover lift. The only hover effect is the dashed underline on links (images may stay static).
+- Visible `:focus-visible` outline: 2px accent, 2px offset.
+- AA contrast in both themes, including text on the ink band.
+- Semantic landmarks, one h1 per page, and logical heading order. Alt text on every image.
 
-**Tag chips**
-- `#f0f0f0` background, `#666` text, 12px, fully rounded (15px), padding about 2px 8px, 5px gaps.
+## 11. Motion
 
-**Logo / organisation grid (experience, affiliations)**
-- Centred columns: 4 per row on desktop, 2 on tablet, 1-2 on mobile, with equal gutters.
-- Each item: a logo (about 110px wide, contained, no border), then the organisation name in 16px bold navy with a short 2px slate rule beneath it (about 130px wide, centred), then the role as an uppercase 14px slate line, then people in blue links, then a small grey date line.
-- Group the grid under underlined headings (variant 2).
+All motion lives in `src/styles/motion.css`, the reveal hook `src/components/useReveal.js` and `src/components/CountUp.jsx`. Header motion lives in `Layout.css` and the hero entrance in `Home.css`.
 
-**Plain lists (education, competitions)**
-- Unstyled or simple bullet lists. A title line in normal weight, followed by an italic grey line for the institution and details. About 1rem between items.
-
-**Footer**
-- Copyright in muted grey on the left, social icons on the right (blue, large, about 2x, spaced about 2rem). Icons dim to 80% opacity on hover with no underline. On mobile both centre and stack.
-
-**Theme toggle**
-- A small round icon-only button in the navbar, and no animated switch.
-
-## 8. Responsive Behavior
-
-- Mobile-first, with breakpoints at 480px, 600px, 768px and 900px.
-- At 768px and below: collapse the nav, centre the profile block (the photo then the caption then the contact list, then the text), reduce body text to about 13.5px, reduce h1 to about 20px and h3 to about 17px, and set container padding to 15px.
-- At 600px and below: stack entry thumbnails above text, make grids 1-2 columns, wrap buttons and chips.
-- At 480px and below: body text about 12.5px, h1 about 18px, h3 about 15.5px.
-- Images always use `max-width: 100%; height: auto`. No horizontal scroll at any width.
-- Touch targets are at least 40px tall.
-
-## 9. Accessibility and Polish
-
-- Visible keyboard focus only on `:focus-visible`: `outline: 2px solid #1585cf; outline-offset: 2px`.
-- Text contrast of at least WCAG AA in both themes.
-- Semantic HTML: `nav`, `main`, `section`, `footer`, with proper heading levels. Alt text on every image.
-- Respect `prefers-reduced-motion` by removing the small hover transitions.
-- Icons are monochrome (Font Awesome style or inline SVG) in the accent or text colour. No emojis anywhere.
-
-## 10. Do Not
-
-- No gradients, glow, blur, neon, 3D or animated backgrounds.
-- No emojis, mascots or stock decorative graphics.
-- No additional accent colours (only the muted badge fills are allowed).
-- No spinning or animated loaders, and no scroll-triggered animation.
-- No heavy shadows, large radii (more than 8px), pill buttons, or hover lift and scale effects.
-- No card grids with big rounded cards for projects. Use clean rows.
+- **Easing**: `--ease-out` `cubic-bezier(0.22, 1, 0.36, 1)` for arrivals, and `--ease-in-out` for the theme crossfade and the timeline spine. Hover is 200ms, arrivals are 400-900ms.
+- **Route change**: the page fades in and rises 10px over 520ms.
+- **Scroll reveal**: elements fade in and rise 22px over 800ms as they enter view. Groups (timelines, card grids, stats, rank tiles, footer columns) stagger by 90ms, capped at 540ms. Section rails slide in from the left. The timeline spine draws downward, and its nodes scale in with their item.
+- **Hero**: the eyebrow, name, statement, buttons and socials rise in sequence. The portrait wipes upward into its frame, and the offset block slides in behind it.
+- **Numbers**: stat values and rank ordinals count up from zero (1.1-1.4s, ease-out cubic) when they are first seen. Screen readers get the final value.
+- **Hover**:
+  - Buttons rise 1px, and their arrow nudges.
+  - Cards rise 3px, with the border strengthening.
+  - The nav underline grows from the centre.
+  - Footer and social icons nudge.
+  - Buttons and chips compress slightly when pressed.
+- **Theme switch**: all colours crossfade over 450ms. The toggle icon spins in.
+- **Mobile menu**: the panel slides open (grid-row 0fr to 1fr) and the links cascade in.
+- **Rules**:
+  - Never animate layout properties of content (width, height, margins).
+  - Hidden reveal states apply only under `html.motion`, so content shows if JavaScript fails.
+  - `prefers-reduced-motion` disables all of it.

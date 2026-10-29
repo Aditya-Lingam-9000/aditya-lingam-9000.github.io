@@ -1,0 +1,270 @@
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  background: var(--nav-bg);
+  border: 1px solid var(--nav-border);
+  border-width: 0 0 1px;
+  padding: 10px 0 20px;
+}
+
+.navbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__brand {
+  color: var(--nav-text);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 15px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbar__brand:hover {
+  color: var(--nav-text);
+}
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar__links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  position: relative;
+  display: block;
+  padding: 15px;
+  color: var(--nav-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.navbar__link.active {
+  background: var(--nav-active);
+}
+
+.navbar__link:hover,
+.navbar__link:focus-visible {
+  background: var(--nav-hover-bg);
+  color: var(--nav-hover-text);
+}
+
+/* Small caret under the hovered tab. */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 8px);
+  bottom: -8px;
+  border: 8px solid transparent;
+  border-bottom-width: 0;
+  border-top-color: var(--nav-active);
+  opacity: 0;
+}
+
+.navbar__link.active::after,
+.navbar__link:hover::after,
+.navbar__link:focus-visible::after {
+  opacity: 1;
+}
+
+.navbar__link:hover::after,
+.navbar__link:focus-visible::after {
+  border-top-color: var(--nav-hover-bg);
+}
+
+.navbar__controls {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 36px;
+  background: transparent;
+  color: var(--nav-text);
+  border: 1px solid #555555;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar__toggle:hover {
+  background: #333333;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: var(--toggle-bg);
+  color: var(--toggle-icon);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+html.dark .theme-toggle {
+  border-color: #334155;
+}
+
+.theme-toggle--mobile {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    padding: 8px 0;
+  }
+
+  .navbar__brand {
+    max-width: calc(100% - 100px);
+    font-size: 16px;
+  }
+
+  .navbar__controls {
+    display: flex;
+  }
+
+  .navbar__menu {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .navbar__menu.is-open {
+    display: block;
+    border-top: 1px solid #333333;
+    margin-top: 8px;
+    padding-top: 4px;
+  }
+
+  .navbar__links {
+    flex-direction: column;
+  }
+
+  .navbar__link {
+    padding: 12px 10px;
+  }
+
+  .navbar__link::after {
+    display: none;
+  }
+
+  .theme-toggle--desktop {
+    display: none;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  padding-bottom: 20px;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--footer-border);
+  padding-top: 20px;
+}
+
+.footer__copy {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.footer__social {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__social a {
+  display: inline-flex;
+  color: var(--social);
+}
+
+.footer__social a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__social {
+    gap: 18px;
+  }
+}
+
+/* ---------- Back to top ---------- */
+
+.back-to-top {
+  position: fixed;
+  right: 0;
+  bottom: 300px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background: var(--accent);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.back-to-top:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .back-to-top {
+    bottom: 20px;
+  }
+}

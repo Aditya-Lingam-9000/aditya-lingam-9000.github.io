@@ -1,0 +1,215 @@
+/* Research page. Colours come from theme.css tokens only, so dark mode follows automatically. */
+
+/* ---------- Shared bits ---------- */
+
+.research-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid var(--card-border);
+  background: var(--thumb-bg);
+  text-align: center;
+}
+
+.research-placeholder span {
+  color: var(--slate);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.research-result {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- Publications (entry card) ---------- */
+
+.research-pub-thumb {
+  flex: 0 0 160px;
+  width: 160px;
+  height: 150px;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  background: var(--thumb-bg);
+  overflow: hidden;
+}
+
+.research-pub-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.research-pub-body {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.research-pub-title {
+  margin: 0 0 6px;
+  font-size: 14.2px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.research-pub-title a {
+  font-weight: 600;
+}
+
+.research-pub-authors {
+  margin: 0 0 4px;
+  color: var(--text-authors);
+  font-size: 13px;
+}
+
+.research-pub-authors strong {
+  color: var(--navy);
+}
+
+.research-pub-venue {
+  margin: 0 0 8px;
+  color: var(--text-meta);
+  font-size: 12.5px;
+  font-style: italic;
+}
+
+/* ---------- Research challenges (project rows) ---------- */
+
+.research-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.research-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--divider-soft);
+}
+
+.research-row:first-child {
+  padding-top: 4px;
+}
+
+.research-row:last-child {
+  border-bottom: 0;
+}
+
+.research-row-media {
+  flex: 0 0 250px;
+  width: 250px;
+  height: 150px;
+  border-radius: 8px;
+  background: var(--thumb-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.research-row-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.research-row-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.research-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-bottom: 8px;
+}
+
+.research-row-meta .badge {
+  margin-bottom: 0;
+}
+
+.research-row-period {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.research-row-title {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.research-row-title a {
+  font-weight: 600;
+}
+
+.research-row-challenge {
+  margin: 0 0 6px;
+  color: var(--text-meta);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.research-row-summary {
+  margin: 0 0 10px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .research-row-summary {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .research-pub-thumb {
+    flex: none;
+    width: 100%;
+    height: 150px;
+  }
+
+  .research-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .research-row-media {
+    flex: none;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 5 / 3;
+  }
+
+  .research-row-title {
+    font-size: 15px;
+  }
+
+  /* A placeholder only repeats the badge text; on phones it is just empty space. */
+  .research-placeholder {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .research-row-summary {
+    font-size: 13.5px;
+    line-height: 21px;
+  }
+}

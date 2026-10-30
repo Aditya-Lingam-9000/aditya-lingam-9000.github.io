@@ -1,4 +1,4 @@
-# Jyothiradithya Lingam - Portfolio
+# Jyothiradithya Lingam - Portfolio 
 
 A plain, academic-style personal portfolio built with React and Vite. The design rules live in [design.md](design.md).
 

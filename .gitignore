@@ -4,3 +4,4 @@ dist
 all_my_files_info.md
 design.md
 *.md
+private/

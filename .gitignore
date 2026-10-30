@@ -1,3 +1,6 @@
 node_modules
 dist
 .DS_Store
+all_my_files_info.md
+design.md
+*.md

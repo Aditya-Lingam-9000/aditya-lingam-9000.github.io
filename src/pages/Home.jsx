@@ -216,21 +216,23 @@ function Skills() {
           </div>
         ))}
       </div>
-      <p className="home-langs">
-        <span className="eyebrow home-langs__head">Languages</span>
-        <span className="home-langs__list">
-          {languages.map((l, i) => (
-            <Fragment key={l}>
-              {i > 0 && (
-                <span className="home-langs__sep" aria-hidden="true">
-                  ·
-                </span>
-              )}
-              <span>{l}</span>
-            </Fragment>
-          ))}
-        </span>
-      </p>
+      {languages.length > 0 && (
+        <p className="home-langs">
+          <span className="eyebrow home-langs__head">Languages</span>
+          <span className="home-langs__list">
+            {languages.map((l, i) => (
+              <Fragment key={l}>
+                {i > 0 && (
+                  <span className="home-langs__sep" aria-hidden="true">
+                    ·
+                  </span>
+                )}
+                <span>{l}</span>
+              </Fragment>
+            ))}
+          </span>
+        </p>
+      )}
     </Section>
   );
 }

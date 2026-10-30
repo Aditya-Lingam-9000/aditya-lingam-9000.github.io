@@ -38,6 +38,7 @@ function HackathonPanel({ item }) {
       <ChipList items={item.tags} />
       <div className="ach-hack__link">
         <ArrowLink to={item.link.href}>{item.link.label}</ArrowLink>
+        {item.code && <ArrowLink to={item.code.href}>{item.code.label}</ArrowLink>}
       </div>
     </article>
   );

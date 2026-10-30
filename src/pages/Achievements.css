@@ -150,6 +150,9 @@
 }
 
 .ach-hack__link {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
   margin-top: auto;
   padding-top: 12px;
   font-size: 14px;

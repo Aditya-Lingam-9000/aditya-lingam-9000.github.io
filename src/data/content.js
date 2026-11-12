@@ -139,12 +139,12 @@ export const researchInterests = ['Computer Vision', 'Robust Deep Learning under
 // Newest first. Inline segments follow the same format as bio.
 export const news = [
   { date: 'Oct 2026', parts: ['Top 10 Finalist at ', { text: 'Megathon 2026, IIIT Hyderabad', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7516477167237763072/' }, ' for SvaraAI, an accessible Android dining assistant built on Bhashini.'] },
-  { date: 'Oct 2026', parts: ['Ranked 33rd among 695 submissions in the ', { text: 'WACV 2027 UPAR Challenge', href: 'https://www.codabench.org/competitions/18196/' }, ' (Track 2: Attribute-based Person Retrieval).'] },
+  { date: 'Oct 2026', parts: ['Ranked 33rd among 695 submissions in the ', 'WACV 2027 UPAR Challenge', ' (Track 2: Attribute-based Person Retrieval).'] },
   { date: 'Aug 2026', parts: ['Received the MacBook Pro Award at the ', { text: 'Build for Good Hackathon 2026', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7496968478638329856/' }, ', among the Top 34 of 3,000+ teams, for Satyamev-Bot.'] },
-  { date: 'Aug 2026', parts: ['Placed 18th in the ', { text: 'MICCAI Deep-Breath 2026 UUSIVC Challenge', href: 'https://www.codabench.org/competitions/17263/' }, ' for multi-organ ultrasound analysis.'] },
-  { date: 'Aug 2026', parts: ['Placed 16th in the ', { text: 'ECCV 2026 MoCha Challenge', href: 'https://www.codabench.org/competitions/16752/' }, ' on Parkinsonian gait severity prediction.'] },
+  { date: 'Aug 2026', parts: ['Placed 18th in the ', 'MICCAI Deep-Breath 2026 UUSIVC Challenge', ' for multi-organ ultrasound analysis.'] },
+  { date: 'Aug 2026', parts: ['Placed 16th in the ', 'ECCV 2026 MoCha Challenge', ' on Parkinsonian gait severity prediction.'] },
   { date: 'Jun 2026', parts: [{ text: 'GOOSE-M2F', href: 'https://arxiv.org/abs/2606.15937' }, ' preprint released on arXiv.'] },
-  { date: 'May 2026', parts: ['Secured 3rd place in the ', { text: 'ICRA 2026 GOOSE 2D Fine-Grained Semantic Segmentation Challenge', href: 'https://www.codabench.org/competitions/14257/' }, ' with 70.08% composite mIoU.'] },
+  { date: 'May 2026', parts: ['Secured 3rd place in the ', 'ICRA 2026 GOOSE 2D Fine-Grained Semantic Segmentation Challenge', ' with 70.08% composite mIoU.'] },
 ];
 
 export const education = [
@@ -158,7 +158,7 @@ export const education = [
     title: 'Pre-University Course (PUC)',
     period: '2023 – 2025',
     institution: 'Rajiv Gandhi University of Knowledge Technologies, IIIT Nuzvid',
-    details: 'CGPA: 9.82/10',
+    details: 'CGPA: 9.8/10',
   },
 ];
 
@@ -187,7 +187,6 @@ export const publications = [
       { label: 'arXiv', href: 'https://arxiv.org/abs/2606.15937' },
       { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
       { label: 'Model', href: 'https://huggingface.co/XYZ9843/GOOSE-M2F' },
-      { label: 'Challenge', href: 'https://www.codabench.org/competitions/14257/' },
     ],
   },
 ];
@@ -207,7 +206,6 @@ export const challenges = [
     tags: ['Person Retrieval', 'Domain Shift', 'Attribute Learning', 'Re-ranking'],
     links: [
       { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/upar_challenge_26_rws27' },
-      { label: 'Challenge', href: 'https://www.codabench.org/competitions/18196/' },
     ],
   },
   {
@@ -223,7 +221,6 @@ export const challenges = [
     tags: ['Medical Imaging', 'Ultrasound', 'Segmentation', 'UNet++'],
     links: [
       { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/uusivc2026' },
-      { label: 'Challenge', href: 'https://www.codabench.org/competitions/17263/' },
     ],
   },
   {
@@ -239,7 +236,6 @@ export const challenges = [
     tags: ['Gait Analysis', 'Motion Embeddings', 'BiGRU', 'Ensemble Learning'],
     links: [
       { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/MoCha-26' },
-      { label: 'Challenge', href: 'https://www.codabench.org/competitions/16752/' },
     ],
   },
   {
@@ -257,17 +253,16 @@ export const challenges = [
       { label: 'arXiv', href: 'https://arxiv.org/abs/2606.15937' },
       { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
       { label: 'Model', href: 'https://huggingface.co/XYZ9843/GOOSE-M2F' },
-      { label: 'Challenge', href: 'https://www.codabench.org/competitions/14257/' },
     ],
   },
 ];
 
 // Ranked results, in the order shown on the CV. `rank` + `suffix` drive the large ordinal; `context` is optional.
 export const rankings = [
-  { rank: '3', suffix: 'rd', place: '3rd Place', event: 'ICRA 2026', badgeKind: 'robotics', name: 'GOOSE 2D Fine-Grained Semantic Segmentation Challenge', metric: '70.08% composite mIoU', note: 'attaining 70.08% official composite mIoU with GOOSE-M2F.', href: 'https://www.codabench.org/competitions/14257/' },
-  { rank: '16', suffix: 'th', place: '16th Place', event: 'ECCV 2026', badgeKind: 'vision', name: 'MoCha Challenge', note: 'for cross-site Parkinsonian gait severity prediction using fused BiGRU/MoMask motion representations and biomechanical features.', href: 'https://www.codabench.org/competitions/16752/' },
-  { rank: '18', suffix: 'th', place: '18th Place', event: 'Deep-Breath 2026 at MICCAI', badgeKind: 'medical', name: 'UUSIVC Challenge', note: 'for multi-organ ultrasound segmentation and diagnostic classification across B-mode images, CEUS clips, and echocardiography video.', href: 'https://www.codabench.org/competitions/17263/' },
-  { rank: '33', suffix: 'rd', context: 'of 695 submissions', place: '33rd among 695 Submissions', event: 'WACV 2027', badgeKind: 'vision', name: 'UPAR Challenge', note: 'for cross-domain attribute-based person retrieval across real-world surveillance datasets.', href: 'https://www.codabench.org/competitions/18196/' },
+  { rank: '3', suffix: 'rd', place: '3rd Place', event: 'ICRA 2026', badgeKind: 'robotics', name: 'GOOSE 2D Fine-Grained Semantic Segmentation Challenge', metric: '70.08% composite mIoU', note: 'attaining 70.08% official composite mIoU with GOOSE-M2F.' },
+  { rank: '16', suffix: 'th', place: '16th Place', event: 'ECCV 2026', badgeKind: 'vision', name: 'MoCha Challenge', note: 'for cross-site Parkinsonian gait severity prediction using fused BiGRU/MoMask motion representations and biomechanical features.' },
+  { rank: '18', suffix: 'th', place: '18th Place', event: 'Deep-Breath 2026 at MICCAI', badgeKind: 'medical', name: 'UUSIVC Challenge', note: 'for multi-organ ultrasound segmentation and diagnostic classification across B-mode images, CEUS clips, and echocardiography video.' },
+  { rank: '33', suffix: 'rd', context: 'of 695 submissions', place: '33rd among 695 Submissions', event: 'WACV 2027', badgeKind: 'vision', name: 'UPAR Challenge', note: 'for cross-domain attribute-based person retrieval across real-world surveillance datasets.' },
 ];
 
 // Hackathon projects and awards.

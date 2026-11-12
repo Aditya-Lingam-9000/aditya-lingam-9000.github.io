@@ -14,7 +14,7 @@ function RankTile({ item, lead }) {
       <div className="ach-rank__body">
         <div className="ach-rank__head">
           <h3 className="ach-rank__name">
-            <ExtLink href={item.href}>{item.name}</ExtLink>
+            {item.href ? <ExtLink href={item.href}>{item.name}</ExtLink> : item.name}
           </h3>
           <Badge kind={item.badgeKind}>{item.event}</Badge>
         </div>

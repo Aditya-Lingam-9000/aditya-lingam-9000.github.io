@@ -185,7 +185,7 @@ export const publications = [
     result: '3rd Place · 70.08% composite mIoU',
     links: [
       { label: 'arXiv', href: 'https://arxiv.org/abs/2606.15937' },
-      { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
+      { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
       { label: 'Model', href: 'https://huggingface.co/XYZ9843/GOOSE-M2F' },
     ],
   },
@@ -205,7 +205,7 @@ export const challenges = [
     summary: 'Developed a cross-domain person retrieval framework for real-world surveillance datasets, combining visual representations with attribute-aware learning. Applied domain-shift calibration and cascaded re-ranking for fine-grained retrieval across datasets.',
     tags: ['Person Retrieval', 'Domain Shift', 'Attribute Learning', 'Re-ranking'],
     links: [
-      { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/upar_challenge_26_rws27' },
+      { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/upar_challenge_26_rws27' },
     ],
   },
   {
@@ -220,7 +220,7 @@ export const challenges = [
     summary: 'Developed a unified multi-branch framework for multi-organ ultrasound segmentation and diagnostic classification across B-mode images, CEUS clips, and echocardiography video. Combined EfficientNet-B5 + UNet++ segmentation trained with a Dice–Focal–BCE loss, 16-frame temporal pooling for CEUS perfusion classification, and morphological refinement; packaged as a Docker submission.',
     tags: ['Medical Imaging', 'Ultrasound', 'Segmentation', 'UNet++'],
     links: [
-      { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/uusivc2026' },
+      { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/uusivc2026' },
     ],
   },
   {
@@ -235,7 +235,7 @@ export const challenges = [
     summary: 'Contributed to a cross-site Parkinsonian gait severity prediction pipeline fusing BiGRU/MoMask motion embeddings with engineered biomechanical features. Applied adversarial feature selection and calibrated ensemble learning to generalize across recording sites.',
     tags: ['Gait Analysis', 'Motion Embeddings', 'BiGRU', 'Ensemble Learning'],
     links: [
-      { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/MoCha-26' },
+      { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/MoCha-26' },
     ],
   },
   {
@@ -251,7 +251,7 @@ export const challenges = [
     tags: ['Semantic Segmentation', 'Mask2Former', 'Long-Tail Learning', 'Robotics'],
     links: [
       { label: 'arXiv', href: 'https://arxiv.org/abs/2606.15937' },
-      { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
+      { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/GOOSE-M2F' },
       { label: 'Model', href: 'https://huggingface.co/XYZ9843/GOOSE-M2F' },
     ],
   },
@@ -276,7 +276,7 @@ export const hackathons = [
     summary: 'Top 34 of 3,000+ teams nationwide. A WhatsApp-based agentic RAG fact-checker that verifies text, screenshot, and voice-note claims in 10 Indian languages plus English, returning a verdict, confidence score, and cited sources. Integrates Whisper ASR and Gemini Vision OCR with a LangChain agent using real-time web search; served via FastAPI and Twilio, containerized with Docker, and auto-deployed to Hugging Face Spaces with GitHub Actions.',
     tags: ['Agentic RAG', 'LangChain', 'Whisper ASR', 'Gemini Vision OCR', 'FastAPI', 'Docker'],
     link: { label: 'View Announcement', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7496968478638329856/' },
-    code: { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/SATYAMEV-BOT' },
+    code: { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/SATYAMEV-BOT' },
   },
   {
     id: 'megathon-2026',
@@ -287,7 +287,7 @@ export const hackathons = [
     summary: 'An Android app (Kotlin, Jetpack Compose) that helps visually, hearing-, and speech-impaired diners read menus, check dietary restrictions, and order through speech-to-speech interaction in 6 languages. Integrates Bhashini ASR, translation, and TTS with ML Kit OCR and Llama 3.3 70B for menu and diet reasoning.',
     tags: ['Android', 'Kotlin', 'Jetpack Compose', 'Bhashini', 'ML Kit OCR', 'Llama 3.3 70B'],
     link: { label: 'View Announcement', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7516477167237763072/' },
-    code: { label: 'Code', href: 'https://github.com/Aditya-Lingam-9000/SvaraAI' },
+    code: { label: 'GitHub Repo', href: 'https://github.com/Aditya-Lingam-9000/SvaraAI' },
   },
 ];
 
